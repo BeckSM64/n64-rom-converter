@@ -60,8 +60,10 @@ def main():
     inExtension  = inputName[-3:]
     outExtension = outputName[-3:]
 
+    validExtensions = ["n64", "z64", "v64"]
+
     # verify valid file extensions were provided
-    if inExtension != ("n64" or "z64" or "v64") or outExtension != ("n64" or "z64" or "v64"):
+    if inExtension not in validExtensions or outExtension not in validExtensions:
         print("Invalid ROM format. Please provide .n64, .z64, or .v64")
         sys.exit(-1)
 
