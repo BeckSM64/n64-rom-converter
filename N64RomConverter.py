@@ -98,9 +98,7 @@ def main():
 
     # n64 format
     if 0x40123780 == romHead:
-        if outExtension == "n64":
-            pass
-        elif outExtension == "z64":
+        if outExtension == "z64":
             romData = dWordSwap(romData)
         elif outExtension == "v64":
             romData = wordSwap(dWordSwap(romData))
@@ -109,8 +107,6 @@ def main():
     if 0x80371240 == romHead:
         if outExtension == "n64":
             romData = dWordSwap(romData)
-        elif outExtension == "z64":
-            pass
         elif outExtension == "v64":
             romData = wordSwap(romData)
 
@@ -120,8 +116,6 @@ def main():
             romData = dWordSwap(wordSwap(romData))
         elif outExtension == "z64":
             romData = wordSwap(romData)
-        elif outExtension == "v64":
-            pass
 
     # Write modified data back to rom
     writeFile(outputName, romData) 
