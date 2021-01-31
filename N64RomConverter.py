@@ -33,9 +33,10 @@ def writeFile(fname, data):
         f.write(data)
 
 def printUsage():
-    '''prints the usage for the script'''
+    '''prints the usage for the script and terminates the process'''
     
     print("python3 N64RomConverter.py -i [INPUT] -o [OUTPUT] \n - [OUTPUT] must have one of these Extensions: n64, v64, z64")
+    sys.exit(-1)
 
 def invalidRom():
     '''prints an invalid ROM error and terminates the process'''
@@ -65,7 +66,6 @@ def main():
     # Check args
     if len(sys.argv) != 5 or sys.argv[1] != "-i" or sys.argv[3] != "-o":
         printUsage()
-        sys.exit(-1)
 
     # Get input file
     inputName = sys.argv[2]
@@ -79,9 +79,13 @@ def main():
 
     validExtensions = ["n64", "z64", "v64"]
 
-    # verify valid file extensions were provided
+    # Verify valid file extensions were provided
     if inExtension not in validExtensions or outExtension not in validExtensions:
         printUsage()
+
+    # Verify two different extensions were provided
+    if inExtension == outExtension:
+        print("Please provide two different ROM formats")
         sys.exit(-1)
 
     # Hold the bytes read in from the rom file
