@@ -64,7 +64,7 @@ def main():
 
     # verify valid file extensions were provided
     if inExtension not in validExtensions or outExtension not in validExtensions:
-        print("Invalid ROM format. Please provide .n64, .z64, or .v64")
+        printUsage()
         sys.exit(-1)
 
     # Hold the bytes read in from the rom file
