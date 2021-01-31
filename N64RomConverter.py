@@ -24,7 +24,7 @@ def writeFile(fname, data):
 def printUsage():
     '''prints the usage for the script'''
     
-    print("USAGE: N64CONVERTER -i [INPUT] -o [OUTPUT] \n - [OUTPUT] must have one of these Extensions: n64, v64, z64")
+    print("python3 N64RomConverter.py -i [INPUT] -o [OUTPUT] \n - [OUTPUT] must have one of these Extensions: n64, v64, z64")
 
 def dWordSwap(byteArray):
     for i in range(0, len(byteArray), 4):
