@@ -1,17 +1,28 @@
 #!/bin/env python3
 import sys
+import os
 
 def getRomHead(byteArray):
     '''returns the head of the rom to determine file extension'''
 
+    validRomHeads = [0x40123780, 0x80371240, 0x37804012]
     romHead = ''.join(format(x, '02x') for x in byteArray[:4])
     romHead = int(romHead, 16)
+
+    if romHead not in validRomHeads:
+        invalidRom()
+
     return romHead
 
 def readFile(fname):
     '''reads in the rom file and return a byte array'''
 
     with open(fname, "rb") as f:
+
+        # Check if file is empty and error out
+        if os.stat(fname).st_size == 0:
+            invalidRom()
+
         file_array = bytearray(f.read())
         return file_array
 
@@ -25,6 +36,12 @@ def printUsage():
     '''prints the usage for the script'''
     
     print("python3 N64RomConverter.py -i [INPUT] -o [OUTPUT] \n - [OUTPUT] must have one of these Extensions: n64, v64, z64")
+
+def invalidRom():
+    '''prints an invalid ROM error and terminates the process'''
+
+    print("Invalid ROM. Please provide a valid ROM image")
+    sys.exit(-1)
 
 def dWordSwap(byteArray):
     for i in range(0, len(byteArray), 4):
