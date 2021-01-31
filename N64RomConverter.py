@@ -56,12 +56,18 @@ def main():
     # Set output file name
     outputName = sys.argv[4]
 
-    # Hold the bytes read in from the rom file
-    romData = readFile(inputName)
-
     # Get input and output extensions
     inExtension  = inputName[-3:]
     outExtension = outputName[-3:]
+
+    # verify valid file extensions were provided
+    if inExtension != ("n64" or "z64" or "v64") or outExtension != ("n64" or "z64" or "v64"):
+        print("Invalid ROM format. Please provide .n64, .z64, or .v64")
+        sys.exit(-1)
+
+    # Hold the bytes read in from the rom file
+    romData = readFile(inputName)
+
     print("Converting from " + inExtension + " to " + outExtension)
 
     # Get rom head
